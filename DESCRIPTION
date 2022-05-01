@@ -1,0 +1,16 @@
+Package: endoj
+Type: Package
+Title: Endogenity analysis based on 2SLS
+Version: 0.1.0
+Author: Andrea Zaccaria, Marcello Gallucci
+Maintainer: Marcello Gallucci <mcfanda@gmail.com>
+Description: Estimation of linear model with endogenous variables
+License: GPL
+Encoding: UTF-8
+LazyData: true
+Imports: jmvcore (>= 0.9.5.2), ivreg, car
+RoxygenNote: >= 7.1.1
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr

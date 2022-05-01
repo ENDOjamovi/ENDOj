@@ -1,0 +1,111 @@
+title: Instrumental variables linear models
+name: endoj
+jus: '2.0'
+compilerMode: tame
+events:
+  update: './endoj.events::update'
+children:
+  - type: VariableSupplier
+    name: variablesupplier
+    suggested:
+      - continuous
+      - nominal
+      - ordinal
+    persistentItems: false
+    stretchFactor: 1
+    children:
+      - type: TargetLayoutBox
+        children:
+          - type: VariablesListBox
+            name: dep
+            maxItemCount: 1
+            isTarget: true
+            itemDropBehaviour: overwrite
+      - type: TargetLayoutBox
+        children:
+          - type: VariablesListBox
+            name: endo
+            isTarget: true
+            events:
+              change: './endoj.events::onChange_endo'
+      - type: TargetLayoutBox
+        children:
+          - type: VariablesListBox
+            name: exo
+            isTarget: true
+            events:
+              change: './endoj.events::onChange_exo'
+      - type: TargetLayoutBox
+        children:
+          - type: VariablesListBox
+            name: iv
+            isTarget: true
+            events:
+              change: './endoj.events::onChange_instruments'
+  - type: CollapseBox
+    label: Model options
+    collapsed: true
+    stretchFactor: 1
+    children:
+      - type: LayoutBox
+        margin: large
+        style: inline
+        children:
+          - type: Label
+            label: Effect Size
+            margin: large
+            style: list
+            children:
+              - name: es_beta
+                type: CheckBox
+                optionName: es
+                optionPart: beta
+              - name: betas_ci
+                type: CheckBox
+                
+          - type: Label
+            label: Confidence Intervals
+            margin: large
+            style: list
+            children:
+              - name: estimates_ci
+                type: CheckBox
+              - type: TextBox
+                name: ci_width
+                label: Interval
+                suffix: '%'
+                format: number
+                enable: (estimates_ci || betas_ci)
+          - type: Label
+            label: Method
+            margin: large
+            style: list
+            children:
+              - type: ComboBox
+                name: ci_method
+              - type: TextBox
+                name: boot_r
+                enable: (ci_method:perc || ci_method:bca)
+                format: number
+              - type: ComboBox
+                name: se_method
+      - type: LayoutBox
+        margin: large
+        style: inline
+        children:
+          - type: Label
+            label: Additional Info
+            children:
+              - type: CheckBox
+                name: vcov
+                
+  - type: CollapseBox
+    label: Options
+    collapsed: true
+    stretchFactor: 1
+    children:
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: Output
+            name: residuals

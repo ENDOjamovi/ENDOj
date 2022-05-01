@@ -1,0 +1,183 @@
+---
+title: Instrumental variables model
+name: endoj
+menuGroup: Linear Models
+version: '0.0.1'
+jas: '1.2'
+export: true
+completeWhenFilled: true
+description:
+    main: |
+           Something here
+    R:
+        dontrun: true
+        usage: |
+            some code here
+            
+
+formula:
+    dep:
+        from: lhs
+        subset: 1
+        required: true
+    covs:
+        from: rhs
+        type: vars
+        permitted: numeric
+    model_terms:
+        from: rhs
+        type: terms
+options:
+    - name: data
+      type: Data
+      description:
+          R: the data as a data frame
+
+    - name: .caller
+      type: String
+      default: "lm"
+      hidden: true
+
+    - name: .interface
+      type: String
+      default: "jamovi"
+      hidden: true
+
+    - name: dep
+      title: Dependent Variable
+      type: Variable
+      default:
+      permitted:
+        - factor
+        - numeric
+      description:
+          R: >
+            a string naming the dependent variable from `data`; the variable
+            must be numeric. Not needed if `formula` is used.
+
+    - name: exo
+      title: Exogenous independent variables
+      type: Variables
+      suggested:
+        - continuous
+        - ordinal
+      permitted:
+        - numeric
+      default:
+      description:
+          R: a vector of strings naming the covariates from `data`. Not needed if `formula` is used.
+    - name: endo
+      title: Endogenous independent variables
+      type: Variables
+      suggested:
+        - continuous
+        - ordinal
+      permitted:
+        - numeric
+      default:
+      description:
+          R: a vector of strings naming the covariates from `data`. Not needed if `formula` is used.
+
+    - name: iv
+      title: Instrumental variables
+      type: Variables
+      suggested:
+        - continuous
+        - ordinal
+      permitted:
+        - numeric
+      default:
+      description:
+          R: a vector of strings naming the covariates from `data`. Not needed if `formula` is used.
+
+    - name: es
+      title: Effect Size
+      type: NMXList
+      options:
+          - name: beta
+            title: β  
+      default:
+          - beta
+      description:
+          R: >
+             a list of effect sizes to print out. They can be:
+              `"eta"` for eta-squared, `'partEta'` for partial eta-squared,
+             `'omega'` for partial omega-squared, `'epsilon'` for partial epsilon-squared, and `'beta'` for standardized
+             coefficients (betas). Default is `"beta"` and `"parEta"`.
+
+
+    - name: estimates_ci
+      title: Estimates C.I.
+      type: Bool
+      default: true
+      description:
+          R: >
+            `TRUE` (default) or `FALSE` , parameters CI in table
+
+    - name: betas_ci
+      title: β C.I.
+      type: Bool
+      default: false
+      description:
+          R: >
+            `TRUE` (default) or `FALSE` , parameters CI in table
+
+    - name: ci_width
+      title: Confidence level
+      type: Number
+      min: 50
+      max: 99.9
+      default: 95
+      description:
+          R: >
+            a number between 50 and 99.9 (default: 95) specifying the confidence
+            interval width for the plots.
+
+
+    - name: ci_method
+      title: CI Method
+      type: List
+      default: wald
+      options:
+        - name:  wald
+          title: Standard (fast)
+        - name: perc
+          title: Bootstrap (Percent)
+        - name:  bca
+          title: Bootstrap (BCa)
+
+    - name: se_method
+      title: SE Method
+      type: List
+      default: wald
+      options:
+        - name:  wald
+          title: Standard
+        - name:  robust 
+          title: Robust
+
+    - name: boot_r
+      title: Bootstrap rep.
+      type: Number
+      min: 1
+      default: 1000
+      description:
+          R: >
+            a number bootstrap repetitions.
+
+    - name: vcov
+      title: Coefficients Covariances
+      type: Bool
+      default: false
+      description:
+          R: >
+            `TRUE` or `FALSE` (default), shows coefficients covariances
+
+
+
+    - name: residuals
+      title: Residuals
+      type: Output            
+
+...
+

@@ -1,0 +1,195 @@
+---
+name:  endoj
+title: Instrumental Variables Linear Models
+jrs: '1.0'
+
+items:
+
+
+  - name: info
+    title: Some Info
+    type: Table
+    columns:
+       - name: info
+         type: text
+         title: ""
+       - name: specs
+         type: text
+         title: ""
+         
+    clearWith:
+        - dep
+
+  - name: main
+    type: Group
+    title: Model Results
+    items:
+           - name: r2
+             title: Model Fit
+             type: Table
+             description: a table of R
+             clearWith:
+                         - dep
+                         - endo 
+                         - exo
+                         - iv
+             columns:
+                    - name: r2
+                      title: R²
+                      type: number
+                    - name: ar2
+                      title: Adj. R²
+                      type: number
+                    - name:  df1
+                      title: df
+                      type: integer
+                    - name:  df2
+                      title: df (res)
+                      type: integer
+                    - name: test
+                      title: Wald test
+                      type: number
+                    - name: p
+                      title: p
+                      type: number
+                      format: zto,pvalue
+             rows: 1  
+
+           - name: anova
+             title: Omnibus tests
+             type: Table
+             description: a table of ANOVA results
+             clearWith:
+                         - dep
+                         - endo 
+                         - exo
+                         - iv
+
+             columns:
+                    - name: source
+                      title: ""
+                      type: text
+                    - name: df
+                      title: df
+                      type: integer
+                    - name: f
+                      title: F
+                      type: number
+                    - name: p
+                      title: p
+                      type: number
+                      format: zto,pvalue
+
+           - name: coefficients
+             title:  Parameter Estimates (Coefficients)
+             type: Table
+             clearWith:
+                         - dep
+                         - endo 
+                         - exo
+                         - iv
+                         - ci_method
+                         - boot_r
+                         - se_method
+
+             columns:
+                    - name: source
+                      title: "Names"
+                      type: text
+                    - name: estimate
+                      title: "Estimate"
+                      type: number
+                    - name: se
+                      title: SE
+                      type: number
+                    - name: est.ci.lower
+                      type: number
+                      title: Lower
+                      visible: (estimates_ci)
+                    - name: est.ci.upper
+                      type: number
+                      title: Upper
+                      visible: (estimates_ci)
+                    - name: beta
+                      type: number
+                      title: β
+                      visible: (es:beta)
+                      format: zto
+                    - name: beta.ci.lower
+                      type: number
+                      title: Lower
+                      visible: (betas_ci)
+                    - name: beta.ci.upper
+                      type: number
+                      title: Upper
+                      visible: (betas_ci)
+                    - name: df
+                      title: "df"
+                      type: integer
+                    - name: t
+                      title: "t"
+                      type: number
+                    - name: p
+                      title: "p"
+                      type: number
+                      format: zto,pvalue
+
+           - name: vcov
+             title: Coefficients Covariances
+             type: Table
+             visible: (vcov)
+             clearWith:
+                    - dep
+                    - model_terms
+                    - contrasts
+                    - covs_scale
+                    - dep_scale
+                    - fixed_intercept
+             columns:
+                    - name: source
+                      title: "Coefficient"
+                      type: text
+
+
+
+  - name: diagnostics
+    type: Group
+    title: Diagnostics
+    items:
+           - name: standard
+             title: Model diagnostics
+             type: Table
+             clearWith:
+                         - dep
+                         - endo 
+                         - exo
+                         - iv
+             rows: 3             
+             columns:
+                    - name: source
+                      title: Test
+                      type: text
+                    - name: df1
+                      title: df1
+                      type: integer
+                    - name: df2
+                      title: df2
+                      type: integer
+                    - name: test
+                      title: Statistic
+                      type: number
+                    - name: p
+                      title: p
+                      type: number
+                      format: zto,pvalue
+                      
+
+  - name: residuals
+    title: Residuals Vales
+    type: Output            
+    varTitle: '`TEST_${ dep }`'
+    varDescription: test values
+    clearWith:
+        - dep
+
+
