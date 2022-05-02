@@ -34,7 +34,7 @@ Initer <- R6::R6Class(
                                                 bca      =  "Bias-corrected and accelerated"
                                                 ))
       tab[[7]]<-list(info="S.E. Method",specs=switch (self$options$se_method,
-                                                wald = "Wald",
+                                                wald = "Standard",
                                                 robust   = "Robust"
       ))
       

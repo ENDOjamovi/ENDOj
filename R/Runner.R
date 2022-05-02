@@ -24,7 +24,11 @@ Runner <- R6::R6Class("Runner",
                             if (!isFALSE(results$warning))
                                self$dispatcher$warnings<-list(topic="info",message=results$warning)
                             self$model<-results$obj
-                            self$summary<-summary(self$model)
+                            
+                            if (self$options$se_method=="robust")
+                                self$summary<-summary(self$model,vcov=sandwich::vcovHC)
+                            else
+                                self$summary<-summary(self$model)
                             
                             if (self$option("es","beta")) {
                               for (n in names(data))
