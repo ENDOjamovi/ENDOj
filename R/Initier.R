@@ -29,12 +29,12 @@ Initer <- R6::R6Class(
       tab[[4]]<-list(info="Instrument Vars",specs=paste(self$instruments,collapse = ", "))
       tab[[5]]<-list(info="",specs="")
       tab[[6]]<-list(info="C.I. Method",specs=switch(self$options$ci_method,
-                                                standard = "Standard",
+                                                wald = "Standard",
                                                 perc     = "Quantiles",
                                                 bca      =  "Bias-corrected and accelerated"
                                                 ))
       tab[[7]]<-list(info="S.E. Method",specs=switch (self$options$se_method,
-                                                wald = "Wald",
+                                                wald = "Standard",
                                                 robust   = "Robust"
       ))
       
@@ -79,11 +79,11 @@ Initer <- R6::R6Class(
       self$independents   <- c(self$options$endo,self$options$exo)
       idform              <- jmvcore::composeFormula(self$options$dep,self$independents)
       
-      self$instruments    <- c(self$options$iv,self$options$exo)
-      isform              <- jmvcore::composeFormula(NULL,self$instruments)
+      instruments         <- c(self$options$iv,self$options$exo)
+      isform              <- jmvcore::composeFormula(NULL,instruments)
       isform              <- gsub("~","|",isform,fixed = T )
       self$formula        <- paste(idform,isform,collapse  = "|")
-    
+      self$instruments    <- self$options$iv
     }
   ) # end of private
 ) # End Rclass

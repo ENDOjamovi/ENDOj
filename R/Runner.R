@@ -24,7 +24,11 @@ Runner <- R6::R6Class("Runner",
                             if (!isFALSE(results$warning))
                                self$dispatcher$warnings<-list(topic="info",message=results$warning)
                             self$model<-results$obj
-                            self$summary<-summary(self$model)
+                            
+                            if (self$options$se_method=="robust")
+                                self$summary<-summary(self$model,vcov=sandwich::vcovHC)
+                            else
+                                self$summary<-summary(self$model)
                             
                             if (self$option("es","beta")) {
                               for (n in names(data))
@@ -108,6 +112,23 @@ Runner <- R6::R6Class("Runner",
                             tab$source<-row.names(tab)
                             return(tab)
                             
+                          },
+                          savePredRes=function(results) {
+                            mark("inside")
+                            if (self$options$predicted && results$predicted$isNotFilled()) {
+                              ginfo("Saving predicted")
+                              p<-stats::predict(self$model)
+                              # we need the rownames in case there are missing in the datasheet
+                              pdf <- data.frame(predicted=p, row.names=rownames(self$model$model))
+                              results$predicted$setValues(p)
+                            }
+                            if (self$options$residuals && results$residuals$isNotFilled()) {
+                              ginfo("Saving residuals")
+                              p<-stats::resid(self$model)
+                              # we need the rownames in case there are missing in the datasheet
+                              pdf <- data.frame(residuals=p, row.names=rownames(self$model$model))
+                              results$residuals$setValues(pdf)
+                            }
                           },
                           
                           
