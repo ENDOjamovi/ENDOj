@@ -4,7 +4,7 @@ readiness <- function(options) {
   results <- list(reason = NULL,
                  ready = TRUE,
                  report = FALSE)
-  
+
   if (!is.something(options$endo)) {
     results$ready   <- FALSE
     results$report  <- TRUE

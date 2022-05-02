@@ -78,6 +78,12 @@ endojClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
             for (smarttab in private$.smartObjs) {
                 smarttab$runTable()
             }
+            ### save predicted and residual
+            mark("before")
+            private$.runner_machine$savePredRes(self$results) 
+            
+            
+            
             ginfo("MODULE:  #### phase end ####")
             
             ginfo("RUN TIME:", Sys.time() - runnow, " secs")

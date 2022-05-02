@@ -178,6 +178,9 @@ options:
     - name: residuals
       title: Residuals
       type: Output            
+    - name: predicted
+      title: Predicted
+      type: Output            
 
 ...
 

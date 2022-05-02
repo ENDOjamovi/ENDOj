@@ -119,6 +119,8 @@ endojOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 default=FALSE)
             private$..residuals <- jmvcore::OptionOutput$new(
                 "residuals")
+            private$..predicted <- jmvcore::OptionOutput$new(
+                "predicted")
 
             self$.addOption(private$...caller)
             self$.addOption(private$...interface)
@@ -135,6 +137,7 @@ endojOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             self$.addOption(private$..boot_r)
             self$.addOption(private$..vcov)
             self$.addOption(private$..residuals)
+            self$.addOption(private$..predicted)
         }),
     active = list(
         .caller = function() private$...caller$value,
@@ -151,7 +154,8 @@ endojOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         se_method = function() private$..se_method$value,
         boot_r = function() private$..boot_r$value,
         vcov = function() private$..vcov$value,
-        residuals = function() private$..residuals$value),
+        residuals = function() private$..residuals$value,
+        predicted = function() private$..predicted$value),
     private = list(
         ...caller = NA,
         ...interface = NA,
@@ -167,7 +171,8 @@ endojOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         ..se_method = NA,
         ..boot_r = NA,
         ..vcov = NA,
-        ..residuals = NA)
+        ..residuals = NA,
+        ..predicted = NA)
 )
 
 endojResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
@@ -177,7 +182,8 @@ endojResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         info = function() private$.items[["info"]],
         main = function() private$.items[["main"]],
         diagnostics = function() private$.items[["diagnostics"]],
-        residuals = function() private$.items[["residuals"]]),
+        residuals = function() private$.items[["residuals"]],
+        predicted = function() private$.items[["predicted"]]),
     private = list(),
     public=list(
         initialize=function(options) {
@@ -197,9 +203,7 @@ endojResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     list(
                         `name`="specs", 
                         `type`="text", 
-                        `title`="")),
-                clearWith=list(
-                    "dep")))
+                        `title`=""))))
             self$add(R6::R6Class(
                 inherit = jmvcore::Group,
                 active = list(
@@ -404,11 +408,15 @@ endojResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             self$add(jmvcore::Output$new(
                 options=options,
                 name="residuals",
-                title="Residuals Vales",
-                varTitle="`TEST_${ dep }`",
-                varDescription="test values",
-                clearWith=list(
-                    "dep")))}))
+                title="Residuals Values",
+                varTitle="`IVRES_${ dep }`",
+                varDescription="ivreg res values"))
+            self$add(jmvcore::Output$new(
+                options=options,
+                name="predicted",
+                title="Predicted Values",
+                varTitle="`IVPRED_${ dep }`",
+                varDescription="ivreg pred values"))}))
 
 endojBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "endojBase",
@@ -476,6 +484,7 @@ endojBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'   \code{results$main$vcov} \tab \tab \tab \tab \tab a table \cr
 #'   \code{results$diagnostics$standard} \tab \tab \tab \tab \tab a table \cr
 #'   \code{results$residuals} \tab \tab \tab \tab \tab an output \cr
+#'   \code{results$predicted} \tab \tab \tab \tab \tab an output \cr
 #' }
 #'
 #' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:

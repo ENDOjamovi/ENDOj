@@ -17,9 +17,6 @@ items:
          type: text
          title: ""
          
-    clearWith:
-        - dep
-
   - name: main
     type: Group
     title: Model Results
@@ -185,11 +182,14 @@ items:
                       
 
   - name: residuals
-    title: Residuals Vales
+    title: Residuals Values
     type: Output            
-    varTitle: '`TEST_${ dep }`'
-    varDescription: test values
-    clearWith:
-        - dep
+    varTitle: '`IVRES_${ dep }`'
+    varDescription: ivreg res values
 
+  - name: predicted
+    title: Predicted Values
+    type: Output            
+    varTitle: '`IVPRED_${ dep }`'
+    varDescription: ivreg pred values
 
