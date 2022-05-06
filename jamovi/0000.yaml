@@ -5,7 +5,7 @@ version: 0.2.0
 jms: '1.0'
 authors:
   - Marcello Gallucci
-  - Andrea Zacaria
+  - Andrea Zagaria
 maintainer: Marcello Gallucci <mcfanda@gmail.com>
 type: R
 description: Jamovi module for instrumental variables two stages regresssion
