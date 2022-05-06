@@ -203,7 +203,10 @@ endojResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     list(
                         `name`="specs", 
                         `type`="text", 
-                        `title`=""))))
+                        `title`="")),
+                refs=list(
+                    "endoj",
+                    "ivreg")))
             self$add(R6::R6Class(
                 inherit = jmvcore::Group,
                 active = list(
