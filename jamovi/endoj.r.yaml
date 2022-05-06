@@ -16,7 +16,10 @@ items:
        - name: specs
          type: text
          title: ""
-         
+    refs:
+      - endoj
+      - ivreg
+
   - name: main
     type: Group
     title: Model Results
