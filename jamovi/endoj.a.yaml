@@ -2,7 +2,7 @@
 title: Instrumental variables model
 name: endoj
 menuGroup: Linear Models
-version: '0.0.1'
+version: '0.1.0'
 jas: '1.2'
 export: true
 completeWhenFilled: true

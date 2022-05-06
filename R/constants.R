@@ -1,6 +1,6 @@
-j_DEBUG=T
-j_INFO=T
-t_INFO=T
+j_DEBUG=F
+j_INFO=F
+t_INFO=F
 
 ########### Greek Letters  ###############
 
