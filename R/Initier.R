@@ -1,5 +1,3 @@
-
-
 Initer <- R6::R6Class(
   "Initer",
   class=TRUE, 
