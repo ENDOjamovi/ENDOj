@@ -426,7 +426,7 @@ endojBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 package = "endoj",
                 name = "endoj",
-                version = c(0,0,1),
+                version = c(0,1,0),
                 options = options,
                 results = endojResults$new(options=options),
                 data = data,
