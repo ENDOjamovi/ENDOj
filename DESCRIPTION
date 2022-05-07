@@ -1,7 +1,7 @@
 Package: endoj
 Type: Package
-Title: Endogenity analysis based on 2SLS
-Version: 0.2.0
+Title: Regression models with instrumental variables
+Version: 0.3.0
 Author:  Marcello Gallucci, Andrea Zagaria
 Maintainer: Marcello Gallucci <mcfanda@gmail.com>
 Description: Estimation of regression models with instrumental variables.

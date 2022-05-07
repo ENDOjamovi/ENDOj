@@ -1,14 +1,16 @@
 ---
-title: endoj
+title: Regression models with instrumental variables
 name: endoj
-version: 0.2.0
+version: 0.3.0
 jms: '1.0'
 authors:
   - Marcello Gallucci
   - Andrea Zagaria
 maintainer: Marcello Gallucci <mcfanda@gmail.com>
 type: R
-description: Jamovi module for instrumental variables two stages regresssion
+description: Estimation of regression models with instrumental variables.
+             Implementes "2SLS" based on R package ivreg. The module provides 
+             also diagnostics for the estimated model
 analyses:
   - title: Instrumental variables model
     name: endoj
